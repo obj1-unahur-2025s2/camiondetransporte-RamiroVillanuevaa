@@ -1,9 +1,34 @@
 import cosas.*
 
-describe "group of test for cosas" {
-
-  test "first test" {
-    assert.that(true)
+describe "TESTEAMOS LAS COSAS" {
+  test "knightrider peligrosidad inicial 10" {
+    assert.that(knightrider.peligrosidad() == 10)
+  }
+  
+  test "bumblebee estado inicial en auto y peligrosidad es 15" {
+    assert.that(bumblebee.estaEnAuto())
+    assert.equals(15, bumblebee.peligrosidad())
+  }
+  
+  test "bumblebee se transforma en robot y su peligrosidad pasa a ser 30" {
+    bumblebee.transformarse()
+    assert.notThat(bumblebee.estaEnAuto())
+    assert.equals(30, bumblebee.peligrosidad())
   }
 
+  test "contendeorPortuario tiene 0 de peso inicial" {
+    assert.equals(0, contenedorPortuario.peso())
+  }
+
+  test "contenedorPortuario agrega un paquete de 100 ladrillos, un arenaGranel de 150 y un bumblebee transformado en robot" {
+    paqueteLadrillos.agregar(100) // 200 de peso
+    arenaGranel.agregar(150) // 150 de peso
+    bumblebee.transformarse() // 800 de peso
+    contenedorPortuario.agregar(paqueteLadrillos)
+    contenedorPortuario.agregar(arenaGranel)
+    contenedorPortuario.agregar(bumblebee) 
+    assert.equals(1250, contenedorPortuario.peso()) // la suma de los 100 de contedor + todo
+
+  }
+  
 }
