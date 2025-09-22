@@ -34,7 +34,7 @@ object camion {
     method estaExedido() = self.pesoTotal() > 2500 //en Kilogramos
 
     method puedeCircular(nivelDePeligrosidad) {
-        return self.estaExedido() && carga.any({a => a.peligrosidad() > nivelDePeligrosidad})
+        return not(self.estaExedido()) && self.todasLasCosasConNivelDePeligrosidad(nivelDePeligrosidad).isEmpty()
         }
 
     method tieneAlgunaCosaEntre(valor1, valor2) {
