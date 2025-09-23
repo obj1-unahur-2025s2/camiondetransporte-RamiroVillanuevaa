@@ -51,6 +51,10 @@ object bateriaAntiaerea {
   
   method estaConMisiles() = estaConMisiles
   
+  method cambiarMisiles() {
+    estaConMisiles = not estaConMisiles
+  }
+
   method peso() = if (self.estaConMisiles()) {
     peso = 300
   } else {
@@ -73,7 +77,7 @@ object contenedorPortuario {
     contenido.add(unObjeto)
   }
   
-  method peligrosidad() = if (contenido.isEmpty()) 0 else contenido.max({ o => o.peligrosidad() }).peligrosidad()
+  method peligrosidad() = if (contenido.isEmpty()) 0 else contenido.max({ o => o.peligrosidad() }).peligrosidad() //contenido.map({o => o.peligrosidad()}).max()
 }
 
 object resudiosRadioactivos {

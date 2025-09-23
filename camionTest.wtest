@@ -17,20 +17,53 @@ describe "group of test for camion" {
     camion.cargar(bumblebee)
 
 
-    arena.agregar(150)
-    camion.cargar(arena)
+    arenaGranel.agregar(150)
+    camion.cargar(arenaGranel)
 
 
     
-    bateriaAntiaerea.ponerMisiles()
+    bateriaAntiaerea.cambiarMisiles()
     camion.cargar(bateriaAntiaerea)
 
 
     
-    ladrillos.cargar(80)
-    camion.cargar(embalajeDeSeguridad(ladrillos))
+    paqueteLadrillos.agregar(80)
+    embalajeSeguridad.embalar(paqueteLadrillos)
+    camion.cargar(embalajeSeguridad)
 
+    assert.equals(bateriaAntiaerea, camion.primerCosaCargadaConPeligrosidad())
+  }
 
+  test "PESOS PARES DE CAMION CON 123 LADRILLOS Y BUMBLEBEE COMO ROBOT" {
+    paqueteLadrillos.agregar(123)
+    bumblebee.transformarse()
+    camion.cargar(bumblebee)
+    camion.cargar(paqueteLadrillos)
+    assert.that(camion.todosLosPesosPares())
+  }
+  test "PESOS IMPARES DE CAMION CON 123 LADRILLOS Y BUMBLEBEE COMO ROBOT" {
+    paqueteLadrillos.agregar(123)
+    bumblebee.transformarse()
+    camion.cargar(bumblebee)
+    camion.cargar(paqueteLadrillos)
+    arenaGranel.agregar(21323)
+    assert.notThat(camion.todosLosPesosPares())
+  }
+  test "hay algo de peso 246 en un camion con 123 ladrillos, bumblebee como robot y arena" {
+    paqueteLadrillos.agregar(123)
+    bumblebee.transformarse()
+    camion.cargar(bumblebee)
+    camion.cargar(paqueteLadrillos)
+    arenaGranel.agregar(21323)
+    assert.that(camion.algunaCosaPesa(246))
+  }
+  test "no hay algo de peso 246 en un camion con 123 ladrillos, bumblebee como robot y arena" {
+    paqueteLadrillos.agregar(123)
+    bumblebee.transformarse()
+    camion.cargar(bumblebee)
+    camion.cargar(paqueteLadrillos)
+    arenaGranel.agregar(21323)
+    assert.notThat(camion.algunaCosaPesa(2))
   }
 
 }
